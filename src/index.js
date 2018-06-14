@@ -30,11 +30,11 @@ var info;
 
 function preload() {
   preloadWorld(this)
-  preloadPlayerSpreadsheet(this)
+  preloadPlayer(this)
 }
 
 function create() {
-  createPlayerAnimation(this)
+  creatingPlayerAnimation(this)
 
   world = new World(this);
   player = new Player(this)

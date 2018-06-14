@@ -1,11 +1,11 @@
-function preloadPlayerSpreadsheet(game) {
+function preloadPlayer(game) {
   game.load.spritesheet('player', 'assets/sprites/spaceman.png', {
     frameWidth: 16,
     frameHeight: 16
   });
 }
 
-function createPlayerAnimation(game) {
+function creatingPlayerAnimation(game) {
   game.anims.create({
     key: 'left',
     frames: game.anims.generateFrameNumbers('player', {
