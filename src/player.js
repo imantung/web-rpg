@@ -46,9 +46,8 @@ function createPlayerAnimation(game) {
 
 
 class Player {
-  constructor(game,layer) {
+  constructor(game) {
     this.sprite = game.physics.add.sprite(50, 100, 'player', 1);
-    game.physics.add.collider(this.sprite, layer);
     game.cameras.main.startFollow(this.sprite);
   }
 

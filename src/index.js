@@ -21,47 +21,35 @@ var config = {
 };
 
 var game = new Phaser.Game(config);
-var map;
 var cursors;
 
+var world;
 var player;
 var debug;
 var info;
 
 function preload() {
-  this.load.image('tiles', 'assets/tilemaps/tiles/catastrophi_tiles_16.png');
-  this.load.tilemapCSV('map', 'assets/tilemaps/csv/catastrophi_level2.csv');
+  preloadWorld(this)
   preloadPlayerSpreadsheet(this)
 }
 
 function create() {
-  // When loading a CSV map, make sure to specify the tileWidth and tileHeight
-  map = this.make.tilemap({
-    key: 'map',
-    tileWidth: 16,
-    tileHeight: 16
-  });
-  var tileset = map.addTilesetImage('tiles');
-  var layer = map.createStaticLayer(0, tileset, 0, 0);
-
-  //  This isn't totally accurate, but it'll do for now
-  map.setCollisionBetween(54, 83);
-  this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-
   createPlayerAnimation(this)
 
-  player = new Player(this, layer)
+  world = new World(this);
+  player = new Player(this)
+  this.physics.add.collider(player.sprite, world.layer);
+  
   debug = new Debug(this)
+  info = new Information(this)
+  info.update()
 
   this.input.keyboard.on('keydown_C', function(event) {
-    var isDebug = debug.toggleShow(map)
+    var isDebug = debug.toggleShow(world.map)
     info.update(isDebug)
   });
 
   cursors = this.input.keyboard.createCursorKeys();
-  
-  info = new Information(this)
-  info.update()
 }
 
 function update(time, delta) {
