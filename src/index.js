@@ -23,10 +23,9 @@ var config = {
 var game = new Phaser.Game(config);
 var map;
 var cursors;
-var debugGraphics;
-var player;
-var showDebug = false;
 
+var player;
+var debug;
 var info;
 
 function preload() {
@@ -52,24 +51,11 @@ function create() {
   createPlayerAnimation(this)
 
   player = new Player(this, layer)
-
-
-  debugGraphics = this.add.graphics();
+  debug = new Debug(this)
 
   this.input.keyboard.on('keydown_C', function(event) {
-    showDebug = !showDebug;
-    debugGraphics.clear();
-
-    if (showDebug) {
-      // Pass in null for any of the style options to disable drawing that component
-      map.renderDebug(debugGraphics, {
-        tileColor: null, // Non-colliding tiles
-        collidingTileColor: new Phaser.Display.Color(243, 134, 48, 200), // Colliding tiles
-        faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Colliding face edges
-      });
-    }
-
-    info.update(showDebug)
+    var isDebug = debug.toggleShow(map)
+    info.update(isDebug)
   });
 
   cursors = this.input.keyboard.createCursorKeys();
