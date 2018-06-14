@@ -1,11 +1,10 @@
 class Information {
   constructor(game) {
-    this.text = game.add.text(16, 16, "n/a", {
+    this.text = game.add.text(16, 16, "", {
       fontSize: '18px',
       fill: '#ffffff'
     });
     this.text.setScrollFactor(0);
-    this.update()
   }
   
   update(isDebug){

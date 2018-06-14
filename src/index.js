@@ -75,6 +75,7 @@ function create() {
   cursors = this.input.keyboard.createCursorKeys();
   
   info = new Information(this)
+  info.update()
 }
 
 function update(time, delta) {
