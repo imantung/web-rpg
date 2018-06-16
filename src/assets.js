@@ -31,7 +31,7 @@ function assetsCreateAnimation(game) {
             start: animation.frameStart,
             end: animation.frameEnd
           }),
-          frameRate: 9,
+          frameRate: (animation.frameEnd - animation.frameStart) * 2.5,
           repeat: -1
         });
       }
