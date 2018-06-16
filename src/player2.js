@@ -1,8 +1,11 @@
 class Player2{
   
   constructor(armor, weapon){
-    this.armor = armor
-    this.weapon = weapon
+    this.armor = armor;
+    this.weapon = weapon;
+    this.state = 'idle';
+    this.face = 'right';
+    this.speed = 100;
   }
   
   create(game,x,y){
@@ -25,37 +28,55 @@ class Player2{
     this.weaponSprite.body.setVelocityY(velocityY);  
   }
   
-  animateWalkRight(){
-    this.armorSprite.anims.play(this.armor+'_walk_right', true);
-    this.weaponSprite.anims.play(this.weapon+'_walk_right', true);
-    this.armorSprite.flipX = false
-    this.weaponSprite.flipX = false
+  idle(){
+    this.setVelocity(0)
+    this.state = 'idle';
   }
   
-  animateWalkLeft(){
-    this.armorSprite.anims.play(this.armor+'_walk_right', true);
-    this.weaponSprite.anims.play(this.weapon+'_walk_right', true);
-    this.armorSprite.flipX = true
-    this.weaponSprite.flipX = true
+  animate(){
+    var armorAnimKey;
+    var weaponAnimKey;
+    var state = this.state;
+    var face = this.face;
+    
+    if(face == 'left'){
+      armorAnimKey = this.armor+'_'+state+'_right'
+      weaponAnimKey = this.weapon+'_'+state+'_right'
+      this.armorSprite.flipX = true
+      this.weaponSprite.flipX = true  
+    } else{
+      armorAnimKey = this.armor+'_'+state+'_'+face
+      weaponAnimKey = this.weapon+'_'+state+'_'+face
+      this.armorSprite.flipX = false
+      this.weaponSprite.flipX = false  
+    }
+    
+    this.armorSprite.anims.play(armorAnimKey, true);
+    this.weaponSprite.anims.play(weaponAnimKey, true);
   }
   
-  animateWalkUp(){
-    this.armorSprite.anims.play(this.armor+'_walk_up', true);
-    this.weaponSprite.anims.play(this.weapon+'_walk_up', true);
-    this.armorSprite.flipX = false
-    this.weaponSprite.flipX = false
+  walkUp(){
+    this.setVelocityY(-this.speed);
+    this.face = 'up';
+    this.state = 'walk';
   }
   
-  animateWalkDown(){
-    this.armorSprite.anims.play(this.armor+'_walk_down', true);
-    this.weaponSprite.anims.play(this.weapon+'_walk_down', true);
-    this.armorSprite.flipX = false
-    this.weaponSprite.flipX = false
+  walkDown(){
+    this.setVelocityY(this.speed);
+    this.face = 'down';
+    this.state = 'walk';
   }
   
-  stopAnimate(){
-    this.armorSprite.anims.stop();
-    this.weaponSprite.anims.stop();
+  walkLeft(){
+    this.setVelocityX(-this.speed);
+    this.face = 'left';
+    this.state = 'walk';
+  }
+  
+  walkRight(){
+    this.setVelocityX(this.speed)
+    this.face = 'right';
+    this.state = 'walk';
   }
 
 }

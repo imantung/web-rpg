@@ -53,9 +53,7 @@
     var game = new Phaser.Game(config);
     var player = new Player2('goldenarmor', 'goldensword')
     var cursors;
-    var armorSprite;
-    var weaponSprite;
-
+    
     function preload() {
       assetsPreloadSpritesheet(this)
     }
@@ -64,43 +62,30 @@
       assetsCreateAnimation(this)
       
       player.create(this, 50, 100)
-
+      
       cursors = this.input.keyboard.createCursorKeys();
     }
-
+    
     function update(time, delta) {
       
-      player.setVelocity(0)
-
-      var speed = 100;
-
-      // Horizontal movement
-      if (cursors.left.isDown) {
-        player.setVelocityX(-speed)
-      } else if (cursors.right.isDown) {
-        player.setVelocityX(speed)
-      }
-
+      player.idle();
+      
       // Vertical movement
       if (cursors.up.isDown) {
-        player.setVelocityY(-speed)
+        player.walkUp();
       } else if (cursors.down.isDown) {
-        player.setVelocityY(speed)
+        player.walkDown();
       }
-
-      // Update the animation last and give left/right animations precedence over up/down animations
+      
+      // Horizontal movement
       if (cursors.left.isDown) {
-        player.animateWalkLeft()
+        player.walkLeft();
       } else if (cursors.right.isDown) {
-        player.animateWalkRight()
-      } else if (cursors.up.isDown) {
-        player.animateWalkUp()
-      } else if (cursors.down.isDown) {
-        player.animateWalkDown()
-      } else {
-        player.stopAnimate()
+        player.walkRight();
       }
-
+      
+      
+      player.animate()
     }
   </script>
 </body>
