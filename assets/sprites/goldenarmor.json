@@ -1,0 +1,43 @@
+{
+  "id": "goldenarmor",
+  "width": 32,
+  "height": 32,
+  "animations": {
+    "atk_right": {
+      "frameStart": 0,
+      "frameEnd": 4
+    },
+    "walk_right": {
+      "frameStart": 5,
+      "frameEnd": 8
+    },
+    "idle_right": {
+      "frameStart": 10,
+      "frameEnd": 11
+    },
+    "atk_up": {
+      "frameStart": 15,
+      "frameEnd": 19
+    },
+    "walk_up": {
+      "frameStart": 20,
+      "frameEnd": 23
+    },
+    "idle_up": {
+      "frameStart": 25,
+      "frameEnd": 26
+    },
+    "atk_down": {
+      "frameStart": 30,
+      "frameEnd": 34
+    },
+    "walk_down": {
+      "frameStart": 35,
+      "frameEnd": 38
+    },
+    "idle_down": {
+      "frameStart": 40,
+      "frameEnd": 41
+    }
+  }
+}
