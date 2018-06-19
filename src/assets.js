@@ -8,7 +8,6 @@ class Assets {
   }
   
   loadSpritesheet(game){
-    console.log(this.objs)
     for (var i = 0; i < this.objs.length; i++) {
       var obj = this.objs[i]
       game.load.spritesheet(obj.id, 'assets/1x/' + obj.id + '.png', {
