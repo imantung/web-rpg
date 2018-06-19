@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Web RPG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script src="./js/getQueryString.js"></script>
+  <script src="./js/jquery-3.1.1.min.js"></script>
+  <script src="./js/datgui.js"></script>
+  <script src="./js/TweenMax.min.js"></script>
+  <script src="./js/labs.js"></script>
+
+  <!-- <script src="//cdn.jsdelivr.net/npm/phaser@3.0.0/dist/phaser.min.js"></script> -->
+  <script src="./build/3.10.0.js"></script>
+</head>
+
+<body data-gr-c-s-loaded="true">
+  <div id="phaser-example" style="overflow: hidden;">
+  </div>
+
+
+  <script type="text/javascript" src="./src/assets.js"></script>
+  <script type="text/javascript" src="./src/player2.js"></script>
+
+  <script type="text/javascript">
+    var config = {
+      type: Phaser.AUTO,
+      width: 800,
+      height: 600,
+      backgroundColor: '#2d2d2d',
+      parent: 'phaser-example',
+      pixelArt: true,
+      physics: {
+        default: 'arcade',
+        arcade: {
+          gravity: {
+            y: 0
+          }
+        }
+      },
+      scene: {
+        preload: preload,
+        create: create,
+        update: update
+      }
+    };
+
+    var game = new Phaser.Game(config);
+    var assets = new Assets();
+    var player = new Player2('goldenarmor', 'goldensword')
+    var cursors;
+
+    $.getJSON("assets/sprites/" + player.armor + ".json", function(data) {
+      assets.add(data)
+    });
+
+    $.getJSON("assets/sprites/" + player.weapon + ".json", function(data) {
+      assets.add(data)
+    });
+
+    // Scene Preload
+    function preload() {
+      assets.loadSpritesheet(this)
+
+      this.load.tilemapTiledJSON('map', 'assets/maps/test2.json');
+      this.load.image('tilesheet', 'assets/1x/tilesheet.png');
+    }
+
+    // Scene Create
+    function create() {
+      assets.animationsCreate(this)
+
+      map = this.make.tilemap({
+        key: 'map'
+      });
+      var tileset = map.addTilesetImage('tilesheet');
+      
+      map.createDynamicLayer('background_1', tileset, 0, 0);
+      map.createDynamicLayer('background_2', tileset, 0, 0);
+      map.createDynamicLayer('background_3', tileset, 0, 0);
+
+      var ground = map.createDynamicLayer('ground', tileset, 0, 0);
+      ground.setCollisionByProperty({
+        collides: true
+      });
+      
+      player.create(this, 50, 100)
+      this.physics.add.collider(player.armorSprite, ground);
+      
+      map.createDynamicLayer('foreground_1', tileset, 0, 0);
+      map.createDynamicLayer('foreground_2', tileset, 0, 0);
+      
+      
+      // var debugGraphics = this.add.graphics();
+      // debugGraphics.clear();
+      // ground.renderDebug(debugGraphics, {
+      //   tileColor: null, // Non-colliding tiles
+      //   collidingTileColor: new Phaser.Display.Color(243, 134, 48, 200), // Colliding tiles
+      //   faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Colliding face edges
+      // });
+
+      cursors = this.input.keyboard.createCursorKeys();
+    }
+
+    // Scene Update
+    function update(time, delta) {
+
+      player.reset();
+
+      // Vertical movement
+      if (cursors.up.isDown) {
+        player.walkUp();
+      } else if (cursors.down.isDown) {
+        player.walkDown();
+      }
+
+      // Horizontal movement
+      if (cursors.left.isDown) {
+        player.walkLeft();
+      } else if (cursors.right.isDown) {
+        player.walkRight();
+      }
+
+      player.animate()
+    }
+  </script>
+</body>
+
+</html>

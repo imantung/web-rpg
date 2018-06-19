@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Web RPG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script src="./js/getQueryString.js"></script>
+  <script src="./js/jquery-3.1.1.min.js"></script>
+  <script src="./js/datgui.js"></script>
+  <script src="./js/TweenMax.min.js"></script>
+  <script src="./js/labs.js"></script>
+
+  <!-- <script src="//cdn.jsdelivr.net/npm/phaser@3.0.0/dist/phaser.min.js"></script> -->
+  <script src="./build/3.10.0.js"></script>
+</head>
+
+<body data-gr-c-s-loaded="true">
+  <div id="phaser-example" style="overflow: hidden;">
+  </div>
+  
+  
+
+  <script type="text/javascript">
+    var config = {
+      type: Phaser.AUTO,
+      width: 800,
+      height: 600,
+      backgroundColor: '#2d2d2d',
+      parent: 'phaser-example',
+      pixelArt: true,
+      physics: {
+        default: 'arcade',
+        arcade: {
+          gravity: {
+            y: 0
+          }
+        }
+      },
+      scene: {
+        preload: preload,
+        create: create,
+        update: update
+      }
+    };
+
+    
+    var game = new Phaser.Game(config);
+    var cursors;
+    
+    // Scene Preload
+    function preload() {
+      this.load.tilemapTiledJSON('map', 'assets/maps/test2.json');
+      this.load.image('tilesheet', 'assets/1x/tilesheet.png');
+    }
+
+    // Scene Create
+    function create() {
+      map = this.make.tilemap({ key: 'map' });
+      var tileset = map.addTilesetImage('tilesheet');
+      var backgroundLayer = map.createDynamicLayer('background', tileset, 0, 0)
+        .setScale(2);
+      var buildingsLayer = map.createDynamicLayer('buildings', tileset, 0, 0)
+        .setScale(2);
+        
+      backgroundLayer.setCollisionByProperty({ collides: true });
+    }
+    
+    // Scene Update
+    function update(time, delta) {
+    
+    }
+  </script>
+</body>
+
+</html>
