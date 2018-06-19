@@ -1,4 +1,4 @@
-class Player2{
+class Player{
   
   constructor(armor, weapon){
     this.armor = armor;

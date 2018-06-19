@@ -21,7 +21,7 @@
 
 
   <script type="text/javascript" src="./src/assets.js"></script>
-  <script type="text/javascript" src="./src/player2.js"></script>
+  <script type="text/javascript" src="./src/player.js"></script>
 
   <script type="text/javascript">
     var config = {
@@ -48,7 +48,7 @@
 
     var game = new Phaser.Game(config);
     var assets = new Assets();
-    var player = new Player2('goldenarmor', 'goldensword')
+    var player = new Player('goldenarmor', 'goldensword')
     var cursors;
 
     $.getJSON("assets/sprites/" + player.armor + ".json", function(data) {
