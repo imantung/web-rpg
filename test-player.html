@@ -49,17 +49,20 @@
     var game = new Phaser.Game(config);
     var assets = new Assets();
     var player = new Player2('goldenarmor', 'goldensword')
+    
+    
+    $.getJSON("assets/sprites/"+player.armor+".json",function(data){
+      assets.add(data)
+    });
+    
+    $.getJSON("assets/sprites/"+player.weapon+".json",function(data){
+      assets.add(data)
+    });
+
     var cursors;
     
     // Scene Preload
     function preload() {
-      $.getJSON("assets/sprites/"+player.armor+".json",function(data){
-        assets.add(data)
-      });
-      
-      $.getJSON("assets/sprites/"+player.weapon+".json",function(data){
-        assets.add(data)
-      });
       assets.loadSpritesheet(this)
     }
 
@@ -75,7 +78,7 @@
     // Scene Update
     function update(time, delta) {
       
-      player.idle();
+      player.reset();
       
       // Vertical movement
       if (cursors.up.isDown) {

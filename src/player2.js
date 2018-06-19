@@ -15,22 +15,21 @@ class Player2{
   
   setVelocity(velocity){
     this.armorSprite.body.setVelocity(velocity);
-    this.weaponSprite.body.setVelocity(velocity);
   }
   
   setVelocityX(velocityX){
     this.armorSprite.body.setVelocityX(velocityX);
-    this.weaponSprite.body.setVelocityX(velocityX);  
   }
   
   setVelocityY(velocityY){
     this.armorSprite.body.setVelocityY(velocityY);
-    this.weaponSprite.body.setVelocityY(velocityY);  
   }
   
-  idle(){
+  reset(){
     this.setVelocity(0)
     this.state = 'idle';
+    this.weaponSprite.x = this.armorSprite.x
+    this.weaponSprite.y = this.armorSprite.y
   }
   
   animate(){
