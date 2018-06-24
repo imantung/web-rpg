@@ -1,4 +1,6 @@
-class Assets {
+/** @author Iman Tung <iman.tung@gmail.com>
+*/
+class SpriteManager {
   constructor(){
     this.objs = [];
   }
