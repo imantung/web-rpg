@@ -5,7 +5,7 @@ class Player{
     this.weapon = weapon;
     this.state = 'idle';
     this.face = 'right';
-    this.speed = 100;
+    this.speed = 160;
   }
   
   create(game,x,y){
